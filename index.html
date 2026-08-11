@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>地雷グリコ</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         トップページ
+    ========================== -->
+
+    <div
+        id="topScreen"
+    >
+
+        <h1>
+            💣 地雷グリコ 💣
+        </h1>
+
+
+        <p>
+            じゃんけんに勝ってゴールを目指せ！
+        </p>
+
+
+        <button
+            id="showRulesButton"
+        >
+            📖 ルール説明
+        </button>
+
+
+        <br>
+        <br>
+
+
+        <button
+            id="gameStartButton"
+        >
+            🎮 ゲーム開始
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         ルール説明画面
+    ========================== -->
+
+    <div
+        id="rulesScreen"
+        style="display: none;"
+    >
+
+        <h2>
+            📖 ルール説明
+        </h2>
+
+
+        <h3>
+            ■ゲーム概要
+        </h3>
+
+
+        <h2>
+            💣 地雷グリコ
+        </h2>
+
+
+        <p>
+            じゃんけんに勝って、ゴールを目指せ！
+        </p>
+
+
+        <p>
+            ただし、道には相手が仕掛けた
+            <strong>地雷</strong>が潜んでいる。
+        </p>
+
+
+        <p>
+            💥
+            <strong>
+                地雷に止まると10段後退！
+            </strong>
+        </p>
+
+
+        <p>
+            相手の地雷を読み切るか、
+            <br>
+            あえて危険な道を進むか――。
+        </p>
+
+
+        <p>
+            <strong>
+                運と心理戦を制して、
+                <br>
+                相手より先にゴールを目指せ！
+            </strong>
+        </p>
+
+
+        <h3>
+            ■ゲームの流れ
+        </h3>
+
+
+        <ol>
+
+            <li>
+                プレイヤー1が地雷を3つ仕掛ける
+            </li>
+
+            <li>
+                プレイヤー2が地雷を3つ仕掛ける
+            </li>
+
+            <li>
+                プレイヤー1がじゃんけんの手を選ぶ
+            </li>
+
+            <li>
+                プレイヤー2がじゃんけんの手を選ぶ
+            </li>
+
+            <li>
+                じゃんけんに勝ったプレイヤーが進む
+            </li>
+
+            <li>
+                相手の地雷に止まった場合、
+                10段下がる
+            </li>
+
+            <li>
+                先に46段へ到達したプレイヤーの勝利！
+            </li>
+
+        </ol>
+
+
+        <h3>
+            ■ゲームのルール
+        </h3>
+
+
+        <ol>
+
+            <li>
+                グーで勝つと3段進む。
+            </li>
+
+            <li>
+                チョキ・パーで勝つと6段進む。
+            </li>
+
+            <li>
+                相手の設置した地雷マスに止まると
+                10段後退する。
+            </li>
+
+            <li>
+                地雷は通過しただけでは起爆せず、
+                そのマスに止まった場合に起爆する。
+            </li>
+
+            <li>
+                「同じ手の」あいこが5回続いた場合、
+                より上の段にいるプレイヤーが
+                その手で勝利する。
+                <br>
+                同じ段に両プレイヤーがいる場合、
+                先にその段に到達したプレイヤーを
+                上の段にいるプレイヤーとみなす。
+            </li>
+
+        </ol>
+
+
+        <h3>
+            ■注意事項
+        </h3>
+
+
+        <ul>
+
+            <li>
+                地雷はプレイヤー1とプレイヤー2で
+                同じマスには設置できない。
+                重複した場合は、そのマスには設置できない。
+            </li>
+
+            <li>
+                地雷は46段目（ゴール）には設置できない。
+            </li>
+
+            <li>
+                9段以下で地雷を踏んだ場合、
+                0段より下へは下がらない。
+            </li>
+
+            <li>
+                自分が仕掛けた地雷マスへ止まった場合は
+                起爆しない。
+                ただし、その地雷の場所は
+                相手プレイヤーに公開される。
+            </li>
+
+        </ul>
+
+
+        <br>
+
+
+        <button
+            id="backToTopButton"
+        >
+            戻る
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         地雷設置画面
+    ========================== -->
+
+    <div
+        id="setupScreen"
+        style="display: none;"
+    >
+
+        <h2 id="phaseTitle">
+            プレイヤー1：地雷を3つ設置
+        </h2>
+
+
+        <p id="instruction">
+            階段をタップして地雷を3か所設置してください。
+        </p>
+
+
+        <p>
+            設置した地雷：
+            <span id="bombCount">
+                0
+            </span>
+            / 3
+        </p>
+
+
+        <p id="setupMessage"></p>
+
+
+        <button
+            id="doneButton"
+            disabled
+        >
+            設置完了
+        </button>
+
+
+        <button
+            id="restartSetupButton"
+            style="display: none;"
+        >
+            プレイヤー1から再設置
+        </button>
+
+
+        <button
+            id="startGameButton"
+            style="display: none;"
+        >
+            次に進む
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         ゲーム画面
+    ========================== -->
+
+    <div
+        id="gameScreen"
+        style="display: none;"
+    >
+
+        <h2 id="turnTitle">
+            プレイヤー1の番
+        </h2>
+
+
+        <p id="turnCountDisplay">
+            1ターン目
+        </p>
+
+
+        <div class="positions">
+
+            <div class="player">
+
+                <strong>
+                    プレイヤー1
+                </strong>
+
+                <span id="player1Position">
+                    0段
+                </span>
+
+            </div>
+
+
+            <div class="player">
+
+                <strong>
+                    プレイヤー2
+                </strong>
+
+                <span id="player2Position">
+                    0段
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <h3>
+            じゃんけんの手を選んでください
+        </h3>
+
+
+        <div class="hands">
+
+            <button
+                class="handButton"
+                data-hand="グー"
+            >
+                ✊
+                <span>
+                    グー
+                </span>
+            </button>
+
+
+            <button
+                class="handButton"
+                data-hand="チョキ"
+            >
+                ✌️
+                <span>
+                    チョキ
+                </span>
+            </button>
+
+
+            <button
+                class="handButton"
+                data-hand="パー"
+            >
+                🖐️
+                <span>
+                    パー
+                </span>
+            </button>
+
+        </div>
+
+
+        <div id="result">
+            プレイヤー1からスタート！
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         共通画面
+    ========================== -->
+
+    <div
+        id="resultScreen"
+        style="display: none;"
+    >
+
+        <div id="resultScreenContent">
+        </div>
+
+
+        <!-- 通常の結果表示 -->
+
+        <button
+            id="showResultButton"
+        >
+            結果を表示
+        </button>
+
+
+        <!-- 次のプレイヤーへ -->
+
+        <button
+            id="nextButton"
+            style="display: none;"
+        >
+            次に進む
+        </button>
+
+
+        <!-- P1 → P2 の切り替え -->
+
+        <button
+            id="switchToPlayer2Button"
+            style="display: none;"
+        >
+            プレイヤー2へ
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         階段
+    ========================== -->
+
+    <div class="stairs"></div>
+
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
