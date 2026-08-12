@@ -178,17 +178,39 @@ h3 {
    地雷設置完了後のボタン
 ======================================== */
 
-#restartSetupButton {
-
-    margin-bottom: 15px;
-
+/* 再設置ボタン・ゲーム開始ボタン共通 */
+#restartSetupButton,
+#startGameButton {
+    display: block;
+    margin: 15px auto;
+    min-width: 220px;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
+/* 再設置ボタン */
+#restartSetupButton {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 2px solid #bbb;
+}
 
+/* ゲーム開始ボタン（強調） */
 #startGameButton {
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s, background-color 0.2s;
+}
 
-    margin-top: 15px;
-
+#startGameButton:hover {
+    background-color: #f57c00;
+    transform: scale(1.05);
 }
 
 
