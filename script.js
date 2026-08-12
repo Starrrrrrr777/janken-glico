@@ -1410,11 +1410,11 @@ function playJanken(
 
 
         showResultButton.style.display =
-            "block";
+            "none";
 
 
         nextButton.style.display =
-            "none";
+            "block";
 
 
         switchToPlayer2Button.style.display =
