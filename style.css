@@ -297,7 +297,6 @@ h3 {
 
 }
 
-
 /* ========================================
    じゃんけんボタン
 ======================================== */
@@ -307,6 +306,8 @@ h3 {
     display: flex;
 
     justify-content: center;
+
+    align-items: center;
 
     gap: 12px;
 
@@ -319,9 +320,9 @@ h3 {
 
     width: 100px;
 
-    min-height: 90px;
+    min-height: 100px;
 
-    padding: 10px;
+    padding: 8px;
 
     border: none;
 
@@ -337,7 +338,9 @@ h3 {
             0.15
         );
 
-    font-size: 35px;
+    font-size: 42px;
+
+    line-height: 1;
 
     cursor: pointer;
 
@@ -352,11 +355,13 @@ h3 {
 
     display: block;
 
-    margin-top: 5px;
+    margin-top: 8px;
 
     font-size: 14px;
 
     font-weight: bold;
+
+    line-height: 1.2;
 
 }
 
@@ -383,7 +388,6 @@ h3 {
     cursor: default;
 
 }
-
 
 /* ========================================
    結果
