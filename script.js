@@ -251,7 +251,7 @@ for (
 
 
     step.textContent =
-        i + "段";
+        i;
 
 
     step.dataset.position =
