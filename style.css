@@ -320,7 +320,7 @@ h3 {
 
     width: 100px;
 
-    min-height: 100px;
+    height: 100px;
 
     padding: 8px;
 
@@ -338,11 +338,13 @@ h3 {
             0.15
         );
 
-    font-size: 42px;
-
-    line-height: 1;
-
     cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
 
     transition:
         transform 0.1s,
@@ -351,17 +353,13 @@ h3 {
 }
 
 
-.handButton span {
+.handEmoji {
 
     display: block;
 
-    margin-top: 8px;
+    font-size: 42px;
 
-    font-size: 14px;
-
-    font-weight: bold;
-
-    line-height: 1.2;
+    line-height: 1;
 
 }
 
@@ -388,6 +386,7 @@ h3 {
     cursor: default;
 
 }
+
 
 /* ========================================
    結果
