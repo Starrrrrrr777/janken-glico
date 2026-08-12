@@ -489,7 +489,7 @@ gameStartButton.addEventListener(
 
 
                 step.textContent =
-                    number + "段";
+                    number;
 
 
                 step.classList.remove(
@@ -569,8 +569,7 @@ function addBomb(
 
     step.textContent =
         "💣 " +
-        position +
-        "段";
+        position;
 
 
     step.classList.add(
@@ -614,8 +613,7 @@ function removeBomb(
 
 
     step.textContent =
-        position +
-        "段";
+        position;
 
 
     step.classList.remove(
@@ -762,7 +760,7 @@ doneButton.addEventListener(
 
 
                         step.textContent =
-                            number + "段";
+                            number;
 
 
                         step.classList.remove(
@@ -923,7 +921,7 @@ restartSetupButton.addEventListener(
 
 
                 step.textContent =
-                    number + "段";
+                    number;
 
 
                 step.classList.remove(
@@ -963,7 +961,7 @@ function hideCurrentPlayerBombs() {
             ) {
 
                 step.textContent =
-                    number + "段";
+                    number;
 
 
                 step.classList.remove(
@@ -1687,7 +1685,7 @@ function showResultScreen() {
 
 
             step.textContent =
-                number + "段";
+                number;
 
         }
     );
@@ -1812,9 +1810,9 @@ async function processResult() {
         </p>
 
         <h2>
-            ${oldPosition}段
+            ${oldPosition}段目
             →
-            ${landedPosition}段
+            ${landedPosition}段目
         </h2>
         `;
 
@@ -1861,7 +1859,7 @@ async function processResult() {
             `
             <br>
 
-            💣 ${landedPosition}段の地雷を踏みました！
+            💣 ${landedPosition}段目の地雷を踏みました！
 
             <br>
 
@@ -1983,7 +1981,7 @@ async function processResult() {
             `
             <br>
 
-            💣 ${bombPosition}段の地雷が爆発！
+            💣 ${bombPosition}段目の地雷が爆発！
 
             <br>
 
@@ -1992,9 +1990,9 @@ async function processResult() {
             <br>
 
             <strong>
-            ${bombOldPosition}段
+            ${bombOldPosition}段目
             →
-            ${bombNewPosition}段
+            ${bombNewPosition}段目
             </strong>
             `;
 
@@ -2344,14 +2342,12 @@ function updatePositions() {
 
     player1Position.textContent =
         players[0]
-            .position +
-        "段";
+            .position;
 
 
     player2Position.textContent =
         players[1]
-            .position +
-        "段";
+            .position;
 
 }
 
@@ -2432,8 +2428,7 @@ function updateStairs() {
 
                 step.textContent =
                     "💣 " +
-                    number +
-                    "段";
+                    number;
 
 
                 step.classList.add(
@@ -2443,8 +2438,7 @@ function updateStairs() {
             } else {
 
                 step.textContent =
-                    number +
-                    "段";
+                    number
 
             }
 
@@ -2580,7 +2574,7 @@ function finishGame(
         <br>
 
         ${winnerName}が
-        46段（ゴール）に到達しました！
+        46段目（ゴール）に到達しました！
         `;
 
 
