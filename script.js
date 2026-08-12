@@ -2319,6 +2319,9 @@ nextButton.addEventListener(
 
         gameScreen.style.display =
             "block";
+            
+        stairs.style.display = 
+        	"block";
 
 
         turnTitle.textContent =
