@@ -2354,6 +2354,81 @@ nextButton.addEventListener(
     }
 );
 
+// ========================================
+// タイトルへ戻る
+// ========================================
+
+backToTopGameButton.addEventListener(
+    "click",
+    function () {
+
+        // ゲーム状態
+        gameStarted = false;
+        gameFinished = false;
+
+        // 画面切り替え
+        topScreen.style.display = "block";
+        rulesScreen.style.display = "none";
+        setupScreen.style.display = "none";
+        gameScreen.style.display = "none";
+        resultScreen.style.display = "none";
+
+        stairs.style.display = "none";
+        backToTopGameButton.style.display = "none";
+
+        // 状態リセット
+        setupPlayer = 0;
+        currentPlayer = 0;
+        bombCount = 0;
+        turnCount = 1;
+
+        selectedHand = null;
+        firstPlayer = null;
+        secondPlayer = null;
+
+        drawCount = 0;
+        lastDrawHand = null;
+
+        resultWinner = null;
+        resultPlayer1Hand = null;
+        resultPlayer2Hand = null;
+        resultProcessed = false;
+
+        viewPlayer = 0;
+
+        // プレイヤー情報
+        players[0].position = 0;
+        players[0].bombs = [];
+        players[0].revealedBombs = [];
+        players[0].arrivalTurn = null;
+
+        players[1].position = 0;
+        players[1].bombs = [];
+        players[1].revealedBombs = [];
+        players[1].arrivalTurn = null;
+
+        // 階段リセット
+        document.querySelectorAll(".step").forEach(function (step) {
+
+            const number = getStepNumber(step);
+
+            step.textContent = number;
+            step.classList.remove("bomb");
+            step.classList.remove("player1");
+            step.classList.remove("player2");
+
+        });
+
+        // じゃんけんボタンを有効化
+        document.querySelectorAll(".handButton").forEach(function (button) {
+            button.disabled = false;
+        });
+
+        updateBombCount();
+
+    }
+);
+
 
 // ========================================
 // プレイヤー位置
@@ -2634,136 +2709,6 @@ function finishGame(
 
         }
     );
-    
-    // ========================================
-// タイトルへ戻る
-// ========================================
 
-backToTopGameButton.addEventListener(
-    "click",
-    function () {
-
-        // ゲーム状態を終了
-        gameStarted = false;
-
-        gameFinished = true;
-
-
-        // タイトル画面を表示
-        topScreen.style.display =
-            "block";
-
-
-        // その他の画面を非表示
-        rulesScreen.style.display =
-            "none";
-
-        setupScreen.style.display =
-            "none";
-
-        gameScreen.style.display =
-            "none";
-
-        resultScreen.style.display =
-            "none";
-
-
-        // 階段を非表示
-        stairs.style.display =
-            "none";
-
-
-        // タイトルへ戻るボタンを非表示
-        backToTopGameButton.style.display =
-            "none";
-
-
-        // =================================
-        // ゲーム状態リセット
-        // =================================
-
-        setupPlayer = 0;
-
-        currentPlayer = 0;
-
-        bombCount = 0;
-
-        turnCount = 1;
-
-        selectedHand = null;
-
-        firstPlayer = null;
-
-        secondPlayer = null;
-
-        drawCount = 0;
-
-        lastDrawHand = null;
-
-        resultWinner = null;
-
-        resultPlayer1Hand = null;
-
-        resultPlayer2Hand = null;
-
-        resultProcessed = false;
-
-        viewPlayer = 0;
-
-
-        // =================================
-        // プレイヤー情報リセット
-        // =================================
-
-        players[0].position = 0;
-        players[0].bombs = [];
-        players[0].revealedBombs = [];
-        players[0].arrivalTurn = null;
-
-
-        players[1].position = 0;
-        players[1].bombs = [];
-        players[1].revealedBombs = [];
-        players[1].arrivalTurn = null;
-
-
-        // =================================
-        // 階段を初期状態に戻す
-        // =================================
-
-        document.querySelectorAll(
-            ".step"
-        )
-        .forEach(
-            function (step) {
-
-                const number =
-                    getStepNumber(step);
-
-
-                step.textContent =
-                    number;
-
-
-                step.classList.remove(
-                    "bomb"
-                );
-
-                step.classList.remove(
-                    "player1"
-                );
-
-                step.classList.remove(
-                    "player2"
-                );
-
-            }
-        );
-
-
-        updateBombCount();
-
-    }
-);
 
 }
