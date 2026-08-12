@@ -1633,6 +1633,9 @@ function showResultScreen() {
 
     gameScreen.style.display =
         "none";
+        
+    stairs.style.display = 
+    	"none";
 
 
     resultScreen.style.display =
