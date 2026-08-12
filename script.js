@@ -1133,6 +1133,9 @@ function playJanken(
 
             gameScreen.style.display =
                 "none";
+            
+            stairs.style.display =
+            	"none";
 
 
             resultScreenContent.innerHTML =
@@ -1454,6 +1457,9 @@ switchToPlayer2Button.addEventListener(
 
         switchToPlayer2Button.style.display =
             "none";
+            
+        stairs.style.display = 
+        	"block";
 
 
         currentPlayer = 1;
