@@ -1810,9 +1810,9 @@ async function processResult() {
         </p>
 
         <h2>
-            ${oldPosition}段目
+            ${oldPosition}段
             →
-            ${landedPosition}段目
+            ${landedPosition}段
         </h2>
         `;
 
@@ -1859,7 +1859,7 @@ async function processResult() {
             `
             <br>
 
-            💣 ${landedPosition}段目の地雷を踏みました！
+            💣 ${landedPosition}段の地雷を踏みました！
 
             <br>
 
@@ -1981,7 +1981,7 @@ async function processResult() {
             `
             <br>
 
-            💣 ${bombPosition}段目の地雷が爆発！
+            💣 ${bombPosition}段の地雷が爆発！
 
             <br>
 
@@ -1990,9 +1990,9 @@ async function processResult() {
             <br>
 
             <strong>
-            ${bombOldPosition}段目
+            ${bombOldPosition}段
             →
-            ${bombNewPosition}段目
+            ${bombNewPosition}段
             </strong>
             `;
 
