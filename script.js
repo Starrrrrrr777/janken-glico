@@ -1417,6 +1417,10 @@ function playJanken(
             "block";
 
 
+        nextButton.disabled =
+            false;
+
+
         switchToPlayer2Button.style.display =
             "none";
 
