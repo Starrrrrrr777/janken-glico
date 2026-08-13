@@ -394,6 +394,8 @@ h3 {
 
 #result {
 
+    display: none;
+
     min-height: 80px;
 
     margin: 20px auto;
@@ -583,7 +585,7 @@ button:disabled {
 .step.player1 {
 
     box-shadow:
-        inset 0 0 0 4px #2196f3;
+        inset 0 0 0 4px #e53935;
 
 }
 
@@ -595,7 +597,29 @@ button:disabled {
 .step.player2 {
 
     box-shadow:
-        inset 0 0 0 4px #4caf50;
+        inset 0 0 0 4px #2196f3;
+
+}
+
+
+.step.bomb.bomb-player1 {
+
+    background: #ffebee;
+
+    border-color: #e53935;
+
+    color: #b71c1c;
+
+}
+
+
+.step.bomb.bomb-player2 {
+
+    background: #e3f2fd;
+
+    border-color: #2196f3;
+
+    color: #0d47a1;
 
 }
 
@@ -940,4 +964,46 @@ button:disabled {
 */
 .stairs {
     display: none;
+}
+
+
+.player1-text {
+
+    color: #d32f2f;
+
+}
+
+
+.player2-text {
+
+    color: #1976d2;
+
+}
+
+
+.player1-panel {
+
+    border: 2px solid #ef9a9a;
+
+}
+
+
+.player2-panel {
+
+    border: 2px solid #90caf9;
+
+}
+
+
+.player1-button {
+
+    background-color: #d32f2f;
+
+}
+
+
+.player2-button {
+
+    background-color: #1976d2;
+
 }

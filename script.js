@@ -72,6 +72,8 @@ let bombCount = 0;
 
 let gameStarted = false;
 
+let bombSetupComplete = false;
+
 let gameFinished = false;
 
 
@@ -132,6 +134,10 @@ const stairs =
 
 const bombCountText =
     document.querySelector("#bombCount");
+
+
+const bombCountContainer =
+    bombCountText.parentElement;
 
 
 const doneButton =
@@ -200,6 +206,45 @@ const result =
     document.querySelector("#result");
 
 
+function updateTurnTitleColor() {
+
+    const isPlayer1 =
+        turnTitle.textContent.includes("1");
+
+
+    turnTitle.classList.toggle(
+        "player1-text",
+        isPlayer1
+    );
+
+
+    turnTitle.classList.toggle(
+        "player2-text",
+        !isPlayer1
+    );
+
+}
+
+
+const turnTitleObserver =
+    new MutationObserver(
+        updateTurnTitleColor
+    );
+
+
+turnTitleObserver.observe(
+    turnTitle,
+    {
+        childList: true,
+        characterData: true,
+        subtree: true
+    }
+);
+
+
+updateTurnTitleColor();
+
+
 const player1Position =
     document.querySelector("#player1Position");
 
@@ -266,7 +311,10 @@ for (
         function () {
 
             // ゲーム開始後は設置不可
-            if (gameStarted) {
+            if (
+                gameStarted ||
+                bombSetupComplete
+            ) {
 
                 return;
 
@@ -423,6 +471,8 @@ gameStartButton.addEventListener(
 
         gameStarted = false;
 
+        bombSetupComplete = false;
+
         gameFinished = false;
 
         currentPlayer = 0;
@@ -527,8 +577,20 @@ gameStartButton.addEventListener(
             "プレイヤー1：地雷を3つ設置";
 
 
+        phaseTitle.style.display =
+            "block";
+
+
         instruction.textContent =
             "階段をタップして地雷を3か所設置してください。";
+
+
+        instruction.style.display =
+            "block";
+
+
+        bombCountContainer.style.display =
+            "block";
 
 
         setupMessage.textContent =
@@ -581,8 +643,25 @@ function addBomb(
         position;
 
 
+    step.classList.remove(
+        "bomb-player1"
+    );
+
+
+    step.classList.remove(
+        "bomb-player2"
+    );
+
+
     step.classList.add(
         "bomb"
+    );
+
+
+    step.classList.add(
+        setupPlayer === 0
+            ? "bomb-player1"
+            : "bomb-player2"
     );
 
 
@@ -627,6 +706,16 @@ function removeBomb(
 
     step.classList.remove(
         "bomb"
+    );
+
+
+    step.classList.remove(
+        "bomb-player1"
+    );
+
+
+    step.classList.remove(
+        "bomb-player2"
     );
 
 
@@ -823,8 +912,23 @@ doneButton.addEventListener(
             hideCurrentPlayerBombs();
 
 
+            bombSetupComplete = true;
+
+
             setupMessage.textContent =
                 "両プレイヤーの地雷設置が完了しました。";
+
+
+            phaseTitle.style.display =
+                "none";
+
+
+            instruction.style.display =
+                "none";
+
+
+            bombCountContainer.style.display =
+                "none";
 
 
             doneButton.style.display =
@@ -891,6 +995,8 @@ restartSetupButton.addEventListener(
 
         bombCount = 0;
 
+        bombSetupComplete = false;
+
 
         setupMessage.textContent =
             "";
@@ -900,8 +1006,20 @@ restartSetupButton.addEventListener(
             "プレイヤー1：地雷を3つ設置";
 
 
+        phaseTitle.style.display =
+            "block";
+
+
         instruction.textContent =
             "階段をタップして地雷を3か所設置してください。";
+
+
+        instruction.style.display =
+            "block";
+
+
+        bombCountContainer.style.display =
+            "block";
 
 
         doneButton.style.display =
@@ -975,6 +1093,16 @@ function hideCurrentPlayerBombs() {
 
                 step.classList.remove(
                     "bomb"
+                );
+
+
+                step.classList.remove(
+                    "bomb-player1"
+                );
+
+
+                step.classList.remove(
+                    "bomb-player2"
                 );
 
             }
@@ -1368,6 +1496,9 @@ function playJanken(
             gameFinished = false;
 
 
+            showResultScreen();
+
+
             showResultButton.style.display =
                 "block";
 
@@ -1400,12 +1531,6 @@ function playJanken(
         secondPlayer = null;
 
 
-        currentPlayer =
-            currentPlayer === 0
-                ? 1
-                : 0;
-
-
         resultProcessed = false;
 
 
@@ -1423,6 +1548,21 @@ function playJanken(
 
         switchToPlayer2Button.style.display =
             "none";
+
+
+        resultWinner =
+            -1;
+
+
+        resultPlayer1Hand =
+            player1Hand;
+
+
+        resultPlayer2Hand =
+            player2Hand;
+
+
+        showResultScreen();
 
 
         return;
@@ -1760,6 +1900,52 @@ async function processResult() {
         resultWinner;
 
 
+    if (
+        winner === -1
+    ) {
+
+        resultScreenContent.innerHTML =
+            `
+            <h3>
+                🤝 あいこ！
+            </h3>
+
+            <p>
+                どちらも移動しません。
+            </p>
+
+            <p>
+                同じ手のあいこ：
+                <strong>
+                    ${drawCount}回
+                </strong>
+            </p>
+            `;
+
+
+        selectedHand = null;
+
+        firstPlayer = null;
+
+        secondPlayer = null;
+
+
+        resultWinner = null;
+
+
+        nextButton.style.display =
+            "block";
+
+
+        nextButton.disabled =
+            false;
+
+
+        return;
+
+    }
+
+
     const winnerName =
         winner === 0
             ? "プレイヤー1"
@@ -1922,27 +2108,6 @@ async function processResult() {
 
 
         hideExplosion();
-
-
-        // =================================
-        // 地雷を公開
-        // =================================
-
-        if (
-            !players[enemyPlayer]
-                .revealedBombs
-                .includes(
-                    bombPosition
-                )
-        ) {
-
-            players[enemyPlayer]
-                .revealedBombs
-                .push(
-                    bombPosition
-                );
-
-        }
 
 
         // =================================
@@ -2368,6 +2533,7 @@ backToTopGameButton.addEventListener(
 
         // ゲーム状態
         gameStarted = false;
+        bombSetupComplete = false;
         gameFinished = false;
 
         // 画面切り替え
@@ -2483,6 +2649,16 @@ function updateStairs() {
             );
 
 
+            step.classList.remove(
+                "bomb-player1"
+            );
+
+
+            step.classList.remove(
+                "bomb-player2"
+            );
+
+
             // =================================
             // 自分の地雷
             // =================================
@@ -2533,6 +2709,14 @@ function updateStairs() {
 
                 step.classList.add(
                     "bomb"
+                );
+
+
+                step.classList.add(
+                    viewPlayer === 0 && ownBomb ||
+                    enemyPlayer === 0 && revealedBomb
+                        ? "bomb-player1"
+                        : "bomb-player2"
                 );
 
             } else {
