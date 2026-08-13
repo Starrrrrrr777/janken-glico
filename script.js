@@ -931,6 +931,10 @@ doneButton.addEventListener(
                 "none";
 
 
+            stairs.style.display =
+                "none";
+
+
             doneButton.style.display =
                 "none";
 
@@ -1019,6 +1023,10 @@ restartSetupButton.addEventListener(
 
 
         bombCountContainer.style.display =
+            "block";
+
+
+        stairs.style.display =
             "block";
 
 
@@ -1146,6 +1154,10 @@ function startGame() {
 
 
     gameScreen.style.display =
+        "block";
+
+
+    stairs.style.display =
         "block";
 
 
